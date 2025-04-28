@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: task-management-api
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - MONGO_URI=mongodb://mongo:27017/taskmanagement
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - mongo
+      - redis
+    networks:
+      - task-network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    environment:
+      - MONGO_INITDB_DATABASE=taskmanagement
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - task-network
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    networks:
+      - task-network
+
+volumes:
+  mongo-data:
+
+networks:
+  task-network:
+    driver: bridge
