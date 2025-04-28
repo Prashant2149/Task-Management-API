@@ -1,53 +1,24 @@
-📚 Table of Contents
-	•	Features
-	•	Tech Stack
-	•	Architecture
-	•	Getting Started
-	•	Project Structure
-	•	API Endpoints
-	•	Environment Variables
-	•	Caching and Background Jobs
-	•	Deployment
-	•	License
+# 📋 Task Management API
 
-🚀 Features
-	•	Full CRUD operations on Tasks
-	•	User Registration & Login
-	•	JWT Authentication with Refresh Tokens
-	•	Role-Based Access Control (Admin, Manager, User)
-	•	MongoDB Mongoose Data Modeling
-	•	Caching with Redis
-	•	Background job processing using BullMQ
-	•	XSS Protection, Rate Limiting, and Input Validation (Zod)
-	•	Pagination and Filtering
-	•	Docker for MongoDB and Redis
-	•	Error Handling Middleware
-	•	Secure Password Hashing (bcrypt)
+A simple and scalable Task Management API built with **Node.js**, **Express.js**, **MongoDB**, **Redis**, and **BullMQ**.
 
-🛠 Tech Stack
-	•	Backend: Node.js, Express.js
-	•	Database: MongoDB (Mongoose ODM)
-	•	Caching & Queue: Redis, BullMQ
-	•	Authentication: JWT (Access + Refresh Tokens)
-	•	Validation: Zod
-	•	Security: Helmet, XSS-Clean, Express-Rate-Limit
-	•	Deployment: AWS EC2 / Azure VM, Docker
-	•	CI/CD: GitHub Actions (for production-ready deployment)
+---
 
-    🏛 Architecture
+## 📦 Tech Stack
 
-📄 A complete architecture diagram is available in /docs/architecture.png (attached separately).
+- Node.js
+- Express.js
+- MongoDB (via Mongoose)
+- Redis (for queueing)
+- BullMQ (job queues)
+- Docker (for MongoDB and Redis containers)
 
-	•	Client → API Server (Express.js)
-	•	MongoDB → Data storage for users, tasks, task history, comments, notifications.
-	•	Redis → Caching and BullMQ queue storage.
-	•	BullMQ Workers → Process notifications.
-	•	Authentication Layer → JWT with Access & Refresh tokens.
-	•	Security Layer → XSS protection, rate limiting, sanitization.
+---
 
-📁 Project Structure
+## 📂 Project Structure
 
-    src/
+```text
+src/
 ├── config/
 │   └── db.js
 │   └── redis.js
@@ -83,41 +54,13 @@
 │   └── logger.js
 └── server.js
 
+📢 Features
+	•	Secure authentication with JWT tokens
+	•	Task assignment to multiple users
+	•	Redis-based background job queue (BullMQ) for sending notifications
+	•	Dockerized MongoDB and Redis setup
+	•	Clean architecture with separation of concerns
+	•	Proper error handling middleware
+	•	Input validation middleware
 
-🔥 API Endpoints
-
-Auth Routes
-	•	POST /api/auth/register
-	•	POST /api/auth/login
-	•	POST /api/auth/refresh-token
-	•	POST /api/auth/logout
-
-Task Routes
-	•	POST /api/tasks
-	•	GET /api/tasks/:id
-	•	PUT /api/tasks/:id
-	•	DELETE /api/tasks/:id
-	•	GET /api/tasks/user/:userId (with pagination, filters)
-
-Notification Routes
-	•	(Handled by worker — coming soon)
-
-
-    ⚙️ Environment Variables
-
-    PORT=5000
-MONGO_URL=mongodb://localhost:27017/task-management
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
-ACCESS_TOKEN_SECRET=youraccesstokensecret
-REFRESH_TOKEN_SECRET=yourrefreshtokensecret
-ACCESS_TOKEN_EXPIRY=15m
-REFRESH_TOKEN_EXPIRY=7d
-RATE_LIMIT_WINDOW_MS=900000
-RATE_LIMIT_MAX=100
-
-    ☁️ Deployment
-	•	Use MongoDB Atlas for cloud database.
-	•	Use AWS EC2 or Azure VM for Node.js backend deployment.
-	•	GitHub Actions for automatic CI/CD pipeline.
-	•	Dockerized Redis in production too.
+    
